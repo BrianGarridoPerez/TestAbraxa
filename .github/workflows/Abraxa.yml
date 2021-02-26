@@ -1,0 +1,24 @@
+name: Abraxa 
+
+
+on: push
+
+jobs:
+  
+  Abraxa:
+   
+    name: Lint code base
+   
+    runs-on: ubuntu-latest
+
+    steps:
+      
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+   
+      - name: Run Abraxa
+        uses: github/Abraxa@v3
+        env:
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
