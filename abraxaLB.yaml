@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: abraxa
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: abraxa
+  namespace: abraxa
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: abraxa
+  template:
+    metadata:
+      labels:
+        app: abraxa
+    spec:
+      containers:
+      - image: briangarridoperez/app-test
+        imagePullPolicy: Always
+        name: abraxa
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: abraxa
+  namespace: abraxa
+spec:
+  ports:
+  - port: 80
+    targetPort: 8080
+    protocol: TCP
+  type: LoadBalancer
+  selector:
+    app: abraxa
